@@ -1,0 +1,8 @@
+fastapi[all]==0.111.0     # FastAPI + uvicorn
+pydantic[email]==2.*      # request / response models
+python-multipart          # file uploads
+openai-whisper            # STT
+resemblyzer               # voice embeddings
+praat-parselmouth         # prosody metrics
+elevenlabs                # or coqui-tts if you go fully OSS
+google-cloud-storage      # save raw & generated audio

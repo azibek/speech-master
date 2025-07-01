@@ -1,1 +1,1 @@
-# speech-master
+# Speak-Like-Idol MVP
