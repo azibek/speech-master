@@ -1,8 +1,8 @@
 from fastapi import APIRouter, UploadFile, File, BackgroundTasks, HTTPException
 from pydantic import BaseModel
 import uuid, tempfile, asyncio
-from ml import stt, style, tts
-from utils import storage, scoring
+from services.backend.app.ml import stt, style, tts
+from services.backend.app.utils import storage, scoring
 
 router = APIRouter()
 
