@@ -1,8 +1,23 @@
 # GCS helpers
-from google.cloud import storage
 import mimetypes, pathlib
 
-client = storage.Client()
+from google.cloud import storage
+from google.oauth2.credentials import Credentials
+import json
+
+# Load previously saved credentials
+with open("token.json", "r") as token_file:
+    token_info = json.load(token_file)
+    print("#"*30, "\n", token_info)
+    creds = Credentials.from_authorized_user_info(token_info)
+
+# Pass credentials explicitly to the client
+client = storage.Client(credentials=creds)
+
+
+
+
+# client = storage.Client()
 bucket = client.bucket("speak-like-idol-assets")
 
 def upload_file(local_path: str, blob_name: str):
