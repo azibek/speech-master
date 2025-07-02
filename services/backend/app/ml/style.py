@@ -6,7 +6,7 @@ import librosa, pathlib
 encoder = VoiceEncoder()
 
 # --- personas pre-computed at repo clone ---
-PERSONA_DIR = pathlib.Path(__file__).parent.parent / "data" / "embeddings"
+PERSONA_DIR = pathlib.Path(__file__).parent.parent.parent / "data" / "embeddings"
 personas = json.loads((PERSONA_DIR / "personas_meta.json").read_text())
 
 def extract(wav_path: str):
