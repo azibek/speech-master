@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { SessionContext } from "../context/SessionContext";
 import { useRecorder } from "../hooks/useRecorder";
@@ -9,12 +9,18 @@ export default function Record() {
   const { persona, setResponse } = useContext(SessionContext);
 
   // redirect if user refreshed without picking persona
-  if (!persona) nav("/");
+  useEffect(()=> {
+    if (!persona) nav("/", { replace: true });
+
+  }, [ persona, nav ])
 
   const { isRecording, elapsed, url, blob, start, stop, reset } = useRecorder();
 
   const handleNext = () => {
-    if (!blob) return;
+    if (!blob) {
+        console.log()
+        return;
+    }
     // store blob in context or go straight to /processing
     nav("/processing", { state: { blob } });
   };

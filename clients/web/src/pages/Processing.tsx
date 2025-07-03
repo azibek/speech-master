@@ -18,17 +18,31 @@ export default function Processing() {
 
   const analyze = useAnalyze();
 
-  useEffect(() => {
-    analyze.mutate(
-      { blob, persona },
-      {
-        onSuccess: (data) => {
-          setResponse(data);
-          nav("/results", { replace: true });
-        },
-      }
-    );
-  }, [analyze, blob, persona, nav, setResponse]);
+  console.log("[Processing] persona:", persona);          // should log id
+console.log("[Processing] blob size:", blob?.size);  
+console.log("mutate is", analyze.mutate?.name || "undefined");
+
+
+/* 1. Run when you have BOTH persona and blob */
+const handleSubmit = () => {
+  console.log(">>>>>>>> about to call mutate", {blob, persona})
+  analyze.mutate(
+    { blob, persona },                 // matches TVariables
+    {
+      onSuccess: (data) => {
+        setResponse(data);             // store JSON in context
+        nav("/results", { replace: true });
+      },
+      onError: (err) => alert(err.message),
+    }
+  );
+};
+
+/* 2. Render states */
+if (analyze.isPending) return <Loader />;
+if (analyze.isError)   return <p>Error: {analyze.error.message}</p>;
+
+
 
   if (analyze.isError)
     return (
