@@ -1,0 +1,43 @@
+{
+  // .vscode/launch.json
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "FastAPI (debug)",
+      "type": "python",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/services/backend",
+      "module": "uvicorn",
+      "args": [
+        "app.main:app",
+        "--reload",
+        "--port",
+        "8000",
+        "--log-level",
+        "info"
+      ],
+      "jinja": true,
+      "justMyCode": true,
+      "envFile": "${workspaceFolder}/.env",          // picks up VITE_API_URL etc.
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/services/backend"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Attach to running Uvicorn",
+      "type": "python",
+      "request": "attach",
+      "connect": {
+        "host": "localhost",
+        "port": 5678
+      },
+      "pathMappings": [
+        {
+          "localRoot": "${workspaceFolder}/services/backend",
+          "remoteRoot": "/app"                       // adjust if debugging inside Docker
+        }
+      ]
+    }
+  ]
+}
