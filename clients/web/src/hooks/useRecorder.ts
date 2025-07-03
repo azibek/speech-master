@@ -40,6 +40,11 @@ export function useRecorder(maxSeconds = 15): UseRecorderReturn {
     }
   };
 
+  const stopAndFinalize = () => {
+    clearTimer();
+    setRec(false);
+  }; 
+
   const stop = useCallback(() => {
     mediaRec.current?.stop();
   }, []);
@@ -54,11 +59,11 @@ export function useRecorder(maxSeconds = 15): UseRecorderReturn {
 
     rec.ondataavailable = (e) => chunks.current.push(e.data);
     rec.onstop = () => {
-      const blob = new Blob(chunks.current, { type: "audio/webm" });
-      setBlob(blob);
-      setUrl(URL.createObjectURL(blob));
-      stream.getTracks().forEach((t) => t.stop());
-      reset();                     // resets flags/timer but keeps blob+url
+        const blob = new Blob(chunks.current, { type: "audio/webm" });
+        setBlob(blob);
+        console.log("✅ recording done", blob?.size);
+        setUrl(URL.createObjectURL(blob));
+        stopAndFinalize();          // DON'T wipe blob/url
     };
 
     rec.start();
