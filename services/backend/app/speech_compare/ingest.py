@@ -1,6 +1,6 @@
 # speech_compare/ingest.py
 from pydub import AudioSegment, effects, silence
-from config import SAMPLE_RATE, DATA_DIR, PAUSE_THRESH_S
+from app.config import SAMPLE_RATE, DATA_DIR, PAUSE_THRESH_S
 from pathlib import Path
 
 def preprocess(src_path: Path) -> Path:

@@ -1,6 +1,6 @@
 # speech_compare/report.py
 import plotly.express as px, pandas as pd, jinja2, base64, io
-from config import REPORT_DIR
+from app.config import REPORT_DIR
 
 def _radar(df: pd.DataFrame) -> str:
     fig = px.line_polar(df.reset_index(), r="user", theta="index",
