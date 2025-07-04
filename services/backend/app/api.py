@@ -1,8 +1,8 @@
 from fastapi import APIRouter, UploadFile, File, BackgroundTasks, HTTPException
 from pydantic import BaseModel
 import uuid, tempfile, asyncio
-from services.backend.app.ml import stt, style, tts
-from services.backend.app.utils import storage, scoring
+from app.ml import stt, style, tts
+from app.utils import storage, scoring
 
 router = APIRouter()
 
@@ -19,8 +19,8 @@ async def analyze_and_clone(
     background_tasks: BackgroundTasks,
     audio: UploadFile = File(...),
 ):
-    if audio.content_type not in ("audio/wav", "audio/x-wav"):
-        raise HTTPException(400, "Please upload a WAV file")
+    if audio.content_type not in ("audio/wav", "audio/wave", "audio/x-wav"):
+        raise HTTPException(400, f"Please upload a WAV file. Curr file: {audio.content_type} ")
 
     # ---- 1. Save raw upload locally ----
     tmp_path = tempfile.NamedTemporaryFile(delete=False, suffix=".wav").name
@@ -45,12 +45,12 @@ async def analyze_and_clone(
                            persona_style=persona_id)
         url = storage.upload_bytes(
             data=cloned,
-            blob_name=f"clones/{uuid.uuid4()}.wav",
+            blob_name=f"data/clones/{uuid.uuid4()}.wav",
             content_type="audio/wav",
         )
         return url
 
-    reference_audio_url = await asyncio.to_thread(clone_and_upload)
+    reference_audio_url = await clone_and_upload()
 
     # ---- 5. Upload raw clip (optional log) ----
     background_tasks.add_task(
