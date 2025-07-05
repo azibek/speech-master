@@ -10,3 +10,12 @@ google-api-python-client
 google-auth-httplib2 
 google-auth-oauthlib
 coqui-tts==0.26.2
+dotenv
+pydub
+whisperx
+spacy
+textstat
+lexicalrichness
+openai
+plotly
+kaleido
