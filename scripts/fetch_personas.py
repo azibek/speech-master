@@ -18,21 +18,26 @@ from typing import List, Dict
 # 1️⃣  Persona catalogue – edit or load via --manifest
 # --------------------------------------------------------------------------- #
 PERSONAS: List[Dict[str, str]] = [
+    # {
+    #     "id": "mrbeast",
+    #     "url": "https://www.youtube.com/watch?v=hTSaweR8qMI",
+    #     "start": "00:00:05"      # HH:MM:SS
+    # },
+    # {
+    #     "id": "aliabdaal",
+    #     "url": "https://www.youtube.com/watch?v=ZAWvRqQwvSM",
+    #     "start": "00:00:05"
+    # },
+    # {
+    #     "id": "emmachamberlain",
+    #     "url": "https://www.youtube.com/watch?v=zLlWBOkU0PA",
+    #     "start": "00:09:10"
+    # },
     {
-        "id": "mrbeast",
-        "url": "https://www.youtube.com/watch?v=hTSaweR8qMI",
-        "start": "00:00:05"      # HH:MM:SS
-    },
-    {
-        "id": "aliabdaal",
-        "url": "https://www.youtube.com/watch?v=ZAWvRqQwvSM",
-        "start": "00:00:05"
-    },
-    {
-        "id": "emmachamberlain",
-        "url": "https://www.youtube.com/watch?v=zLlWBOkU0PA",
-        "start": "00:09:10"
-    },
+        "id": "morganfreeman",
+        "url": "https://www.youtube.com/watch?v=lwf8rPvLajE",
+        "start" : "00:00:10"
+    }
 ]
 
 # --------------------------------------------------------------------------- #

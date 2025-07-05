@@ -1,14 +1,16 @@
 from resemblyzer import VoiceEncoder, preprocess_wav
 import parselmouth, librosa, json, pathlib, numpy as np
 
-root = pathlib.Path(__file__).parent.parent / "data" / "personas"
-out  = pathlib.Path(__file__).parent.parent / "data" / "embeddings"
+root = pathlib.Path(__file__).parent.parent / "services" / "backend" / "data" / "personas"
+out  = pathlib.Path(__file__).parent.parent / "services" / "backend" / "data" / "embeddings"
 out.mkdir(parents=True, exist_ok=True)
 
+print(root)
 encoder = VoiceEncoder()
 meta = {}
 
 for wav_path in root.glob("*.wav"):
+    print(wav_path)
     pid = wav_path.stem.lower()          # e.g. mrbeast.wav → mrbeast
     wav = preprocess_wav(wav_path)
     embed = encoder.embed_utterance(wav).tolist()
